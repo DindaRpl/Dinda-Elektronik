@@ -90,7 +90,7 @@ const ManageCategories = () => {
                 alert("Kategori dihapus! 🗑️");
                 fetchCategories();
             })
-            .catch(err => alert("Gagal menghapus kategori!"));
+            .catch(err => alert("Gagal Menghapus Kategori, Kategori Sedang Dipakai Produk!"));
         }
     };
 
