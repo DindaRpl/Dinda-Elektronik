@@ -31,7 +31,7 @@ function App () {
             {/* 2. Untuk melihat detail barang per transaksi (pakai :id sebagai parameter) */}
             <Route path="/detail-transaksi/:id" element={<TransactionDetail />} />
             
-            {/* Rute default: Jika path ngawur, lempar ke login */}
+            {/* Rute default: Jika path tidak sesuai, maka kembali ke login */}
             <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
     );
