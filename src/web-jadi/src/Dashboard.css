@@ -690,3 +690,99 @@ body {
     background-color: #d4ac0d;
     transform: scale(1.05);
 }
+
+
+
+
+
+
+/* --- KERANJANG BELANJA --- */
+
+/* Container item di dalam list */
+.cart-item-modern {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 8px;
+    border-radius: 10px;
+}
+
+/* Bagian Kiri: Gambar + Nama */
+.cart-item-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cart-img-small {
+    width: 60px; /* Ukuran gambar dikunci biar gak kegedean */
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+}
+
+.cart-item-info h4 {
+    margin: 0;
+    font-size: 14px;
+    color: #2c3e50;
+    max-width: 150px; /* Biar nama produk panjang gak ngerusak layout */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cart-item-info p {
+    margin: 4px 0 0 0;
+    font-size: 13px;
+    color: #27ae60;
+    font-weight: bold;
+}
+
+/* Bagian Kanan: Tombol Qty & Hapus */
+.cart-item-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.qty-control {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 2px 8px;
+    border: 1px solid #ddd;
+}
+
+.qty-control button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #e67e22;
+    padding: 0 10px;
+}
+
+.qty-control span {
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+.delete-item {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.delete-item:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
