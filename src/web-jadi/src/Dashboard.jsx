@@ -14,8 +14,6 @@ function Dashboard() {
     const [showCart, setShowCart] = useState(false); 
     const [selectedItems, setSelectedItems] = useState([]); 
     const [userData, setUserData] = useState(null);
-
-    // --- STATE BARU UNTUK STRUK ---
     const [showReceipt, setShowReceipt] = useState(false);
     const [receiptData, setReceiptData] = useState(null);
 
@@ -59,7 +57,6 @@ function Dashboard() {
         alert(`${product.name} masuk ke keranjang 🛒`);
     };
 
-    // --- LOGIC BARU: MUNCULKAN STRUK DULU ---
     const handleBuyNow = (product) => {
         setReceiptData({
             items: [{ ...product, quantity: 1 }],
@@ -83,7 +80,6 @@ function Dashboard() {
         setShowReceipt(true);
     };
 
-    // --- FUNGSI FINAL: BAYAR KE DATABASE ---
     const prosesBayarFix = async () => {
         const token = localStorage.getItem("token");
         try {
@@ -101,10 +97,9 @@ function Dashboard() {
             if (response.status === 201) {
                 alert("🎉 Pembayaran Berhasil! Terima kasih sudah berbelanja.");
                 setShowReceipt(false);
-                fetchProducts(); // Refresh stok
+                fetchProducts(); 
                 
                 if (receiptData.isFromCart) {
-                    // Hapus item yang sudah dibayar dari keranjang
                     const remainingCart = cart.filter(item => !selectedItems.includes(item.id));
                     setCart(remainingCart);
                     setSelectedItems([]);
@@ -154,6 +149,11 @@ function Dashboard() {
         return matchesCategory && matchesSearch;
     });
 
+    // Menghitung total belanja untuk ringkasan di keranjang
+    const cartTotalPrice = cart
+        .filter(item => selectedItems.includes(item.id))
+        .reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
     return (
         <>
             <Header 
@@ -174,33 +174,53 @@ function Dashboard() {
                             <h2 className="cart-title">🛒 Keranjang Belanja</h2>
                             <button className="back-shopping-btn" onClick={() => setShowCart(false)}>← Kembali</button>
                         </div>
+                        
                         <div className="cart-content-shopee">
                              <div className="cart-items-list-shopee">
                                 {cart.length > 0 ? cart.map((item, index) => (
-                                    <div key={index} className="cart-item-card-shopee">
-                                        <input type="checkbox" onChange={() => toggleSelect(item.id)} checked={selectedItems.includes(item.id)} />
-                                        <img src={item.images || "https://via.placeholder.com/150"} alt={item.name} className="cart-item-img-shopee" />
-                                        <div className="cart-item-details-shopee">
-                                            <h4>{item.name}</h4>
-                                            <p>Rp {Number(item.price).toLocaleString('id-ID')}</p>
+                                    <div key={item.id} className="cart-item-card-shopee">
+                                        <div className="cart-item-left-section">
+                                            <input 
+                                                type="checkbox" 
+                                                onChange={() => toggleSelect(item.id)} 
+                                                checked={selectedItems.includes(item.id)} 
+                                            />
+                                            <img src={item.images || "https://via.placeholder.com/150"} alt={item.name} className="cart-item-img-shopee" />
+                                            <div className="cart-item-details-shopee">
+                                                <h4>{item.name}</h4>
+                                                <p>Rp {Number(item.price).toLocaleString('id-ID')}</p>
+                                            </div>
                                         </div>
-                                        <div className="cart-item-action-shopee">
-                                            <button onClick={() => updateQuantity(index, -1)}>−</button>
-                                            <span>{item.quantity}</span>
-                                            <button onClick={() => updateQuantity(index, 1)}>+</button>
-                                            <button onClick={() => removeFromCart(index)}>🗑️</button>
+                                        
+                                        <div className="cart-item-right-section">
+                                            <div className="qty-control-modern">
+                                                <button onClick={() => updateQuantity(index, -1)}>−</button>
+                                                <span>{item.quantity}</span>
+                                                <button onClick={() => updateQuantity(index, 1)}>+</button>
+                                            </div>
+                                            <button className="delete-btn-modern" onClick={() => removeFromCart(index)}>🗑️</button>
                                         </div>
                                     </div>
-                                )) : <p>Keranjang kosong</p>}
+                                )) : <p className="empty-cart-msg">Keranjang kamu masih kosong nih...</p>}
                              </div>
+
+                             {/* Bagian Ringkasan Harga di Kanan */}
                              <div className="cart-summary-card-shopee">
-                                <h3>Total: Rp {receiptData?.total ? receiptData.total.toLocaleString('id-ID') : cart.filter(i => selectedItems.includes(i.id)).reduce((a, b) => a + (b.price * b.quantity), 0).toLocaleString('id-ID')}</h3>
+                                <h3>Ringkasan Belanja</h3>
+                                <div className="summary-line">
+                                    <span>Total Produk:</span>
+                                    <span>{selectedItems.length} Item</span>
+                                </div>
+                                <div className="summary-total-line">
+                                    <span>Total Harga:</span>
+                                    <strong>Rp {cartTotalPrice.toLocaleString('id-ID')}</strong>
+                                </div>
                                 <button 
                                     className="checkout-btn-shopee" 
                                     disabled={selectedItems.length === 0}
                                     onClick={handleCheckout}
                                 >
-                                    Checkout
+                                    Beli Sekarang ({selectedItems.length})
                                 </button>
                              </div>
                         </div>
@@ -226,7 +246,8 @@ function Dashboard() {
                                     <ProductCard
                                         key={item.id}
                                         title={item.name}
-                                        description={`${item.brand || 'Original'} | Stok: ${item.stock}`} 
+                                        description={`${item.brand || 'Original'}`} 
+                                        stock={item.stock}
                                         price={Number(item.price).toLocaleString('id-ID')}
                                         image={item.images || "https://via.placeholder.com/500?text=Produk"}
                                         onAddToCart={() => addToCart(item)}
