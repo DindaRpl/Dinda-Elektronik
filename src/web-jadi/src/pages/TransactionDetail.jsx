@@ -27,7 +27,7 @@ const TransactionDetail = () => {
 
     return (
         <div className="manage-container">
-            {/* Header dengan Tombol Kembali & Cetak */}
+            {/* Header: Hilang saat diprint */}
             <div className="manage-header no-print">
                 <div className="header-info">
                     <button className="back-btn" onClick={() => navigate("/riwayat-transaksi")}>← Kembali</button>
@@ -38,7 +38,7 @@ const TransactionDetail = () => {
                 </button>
             </div>
 
-            {/* CARD MODERN (Ganti yang datar polos tadi) */}
+            {/* Info Card: Kasir & Waktu */}
             <div className="transaction-info-card-modern">
                 <div className="info-main">
                     <div className="info-group">
@@ -60,7 +60,7 @@ const TransactionDetail = () => {
                 </div>
             </div>
 
-            {/* Tabel Detail Produk */}
+            {/* Tabel Produk */}
             <div className="table-wrapper">
                 <table className="styled-table">
                     <thead>
@@ -95,7 +95,13 @@ const TransactionDetail = () => {
                 </table>
             </div>
             
-            <p className="only-print footer-note">Terima kasih telah berbelanja di Dinda Elektronik!</p>
+            {/* Footer Ucapan Terima Kasih */}
+            <div className="footer-thanks-container">
+                <div className="thanks-divider"></div>
+                <p className="thanks-text">✨ Terima kasih telah berbelanja di <strong>Dinda Elektronik</strong>! ✨</p>
+                <p className="sub-thanks">Simpan struk ini sebagai bukti pembayaran yang sah.</p>
+                <div className="barcode-mockup only-print">|||| || ||||| |||| || ||| ||||</div>
+            </div>
         </div>
     );
 };
