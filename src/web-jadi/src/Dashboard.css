@@ -295,7 +295,7 @@ body {
 /* --- STYLE UNTUK KERANJANG --- */
 .cart-view-container {
     padding: 30px;
-    background-color: #f5f5f5; /* Background abu-abu muda biar item keranjang pop-out */
+    background-color: #f4f7f6;
     min-height: 80vh;
 }
 
@@ -305,8 +305,6 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 15px;
 }
 
 .cart-title {
@@ -340,13 +338,13 @@ body {
 /* --- LAYOUT UTAMA --- */
 .cart-content-shopee {
     display: flex;
-    gap: 30px; /* Jarak antara daftar barang dan ringkasan */
+    gap: 30px;
     align-items: flex-start;
 }
 
 /* --- SISI KIRI: DAFTAR BARANG --- */
 .cart-items-list-shopee {
-    flex: 2; /* Mengambil 2/3 ruang */
+    flex: 2;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -355,12 +353,18 @@ body {
 /* --- KARTU PRODUK DI KERANJANG (Modern & Clean) --- */
 .cart-item-card-shopee {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    background-color: white;
+    background: white;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Shadow tipis */
-    transition: transform 0.2s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.cart-item-left-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .cart-item-card-shopee:hover {
@@ -393,14 +397,30 @@ body {
 }
 
 .cart-item-img-shopee {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* Menjaga proporsi gambar */
+    width: 100px !important;  /* Pakai !important biar gak kalah sama style lain */
+    height: 100px !important;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #f9f9f9;
 }
 
 /* --- DETAIL PRODUK --- */
-.cart-item-details-shopee {
-    flex: 1;
+.cart-item-details-shopee h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.cart-item-details-shopee p {
+    color: #e67e22;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+}
+
+.cart-item-right-section {
+    display: flex;
+    align-items: center;
+    gap: 25px;
 }
 
 .item-name-shopee {
@@ -466,11 +486,22 @@ body {
 }
 
 .cart-summary-card-shopee {
-    background-color: white;
+    flex: 1;
+    background: white;
     padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 100px;
+}
+
+.summary-total-line {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    font-size: 18px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
 }
 
 .summary-title-shopee {
@@ -522,16 +553,14 @@ body {
 /* --- TOMBOL CHECKOUT ORANGE --- */
 .checkout-btn-shopee {
     width: 100%;
-    margin-top: 25px;
     padding: 15px;
-    background-color: #f39c12; /* Warna orange utama Dinda */
+    background: #f39c12;
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
+    border-radius: 10px;
     font-weight: bold;
+    font-size: 16px;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
 .checkout-btn-shopee:hover {
@@ -539,8 +568,7 @@ body {
 }
 
 .checkout-btn-shopee:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+    background: #ccc;
 }
 
 .back-btn-shopee {
@@ -749,28 +777,37 @@ body {
     gap: 15px;
 }
 
-.qty-control {
+.qty-control-modern {
     display: flex;
     align-items: center;
-    background: #f8f9fa;
-    border-radius: 20px;
-    padding: 2px 8px;
     border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.qty-control button {
+.qty-control-modern button {
+    background: #eee;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.qty-control-modern span {
+    padding: 0 15px;
+    font-weight: bold;
+}
+
+.delete-btn-modern {
     background: none;
     border: none;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
-    color: #e67e22;
-    padding: 0 10px;
+    transition: 0.3s;
 }
 
-.qty-control span {
-    font-weight: bold;
-    min-width: 20px;
-    text-align: center;
+.delete-btn-modern:hover {
+    transform: scale(1.2);
 }
 
 .delete-item {
