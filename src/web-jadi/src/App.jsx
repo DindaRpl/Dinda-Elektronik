@@ -2,27 +2,36 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Dashboard from "./Dashboard"; 
+
+// Import Halaman Kelola
 import ManageProducts from "./pages/ManageProducts"; 
 import ManageUsers from "./pages/ManageUsers"; 
-// 1. IMPORT file ManageCategories yang baru saja kamu buat
 import ManageCategories from "./pages/ManageCategories"; 
+
+// Import Halaman Transaksi 
+import TransactionHistory from "./pages/TransactionHistory";
+import TransactionDetail from "./pages/TransactionDetail";
 
 function App () {
     return(
         <Routes>
+            {/* Autentikasi */}
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             
-            {/* Rute untuk Kelola Produk */}
+            {/* Rute Master Data */}
             <Route path="/kelola-produk" element={<ManageProducts />} />
-
-            {/* Rute untuk Kelola User */}
             <Route path="/kelola-user" element={<ManageUsers />} />
-            
-            {/* 2. TAMBAHKAN rute untuk Kelola Kategori */}
             <Route path="/kelola-kategori" element={<ManageCategories />} />
             
-            {/* Rute default: Jika path tidak ditemukan, lempar ke login */}
+            {/* Rute Transaksi */}
+            {/* 1. Untuk melihat daftar semua transaksi */}
+            <Route path="/riwayat-transaksi" element={<TransactionHistory />} />
+            
+            {/* 2. Untuk melihat detail barang per transaksi (pakai :id sebagai parameter) */}
+            <Route path="/detail-transaksi/:id" element={<TransactionDetail />} />
+            
+            {/* Rute default: Jika path ngawur, lempar ke login */}
             <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
     );
