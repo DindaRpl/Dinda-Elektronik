@@ -15,6 +15,10 @@ function Dashboard() {
     const [selectedItems, setSelectedItems] = useState([]); 
     const [userData, setUserData] = useState(null);
 
+    // --- STATE BARU UNTUK STRUK ---
+    const [showReceipt, setShowReceipt] = useState(false);
+    const [receiptData, setReceiptData] = useState(null);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -43,7 +47,6 @@ function Dashboard() {
         }
     };
 
-    // --- FUNGSI KERANJANG ---
     const addToCart = (product) => {
         const existingItemIndex = cart.findIndex(item => item.id === product.id);
         if (existingItemIndex !== -1) {
@@ -56,32 +59,62 @@ function Dashboard() {
         alert(`${product.name} masuk ke keranjang 🛒`);
     };
 
-    // --- FUNGSI BARU: BELI SEKARANG (Create Transaction) ---
-    const handleBuyNow = async (product) => {
-        const token = localStorage.getItem("token");
-        const confirmBuy = window.confirm(`Konfirmasi pembelian ${product.name}?`);
+    // --- LOGIC BARU: MUNCULKAN STRUK DULU ---
+    const handleBuyNow = (product) => {
+        setReceiptData({
+            items: [{ ...product, quantity: 1 }],
+            total: Number(product.price),
+            isFromCart: false
+        });
+        setShowReceipt(true);
+    };
+
+    const handleCheckout = () => {
+        const itemsToPay = cart.filter(item => selectedItems.includes(item.id));
+        if (itemsToPay.length === 0) return alert("Pilih produk di keranjang dulu!");
         
-        if (confirmBuy) {
-            try {
-                const dataTransaksi = {
-                    items: [{ product_id: product.id, quantity: 1 }]
-                };
+        const total = itemsToPay.reduce((sum, item) => sum + (Number(item.price) * item.quantity), 0);
+        
+        setReceiptData({
+            items: itemsToPay,
+            total: total,
+            isFromCart: true
+        });
+        setShowReceipt(true);
+    };
 
-                const response = await axios.post("http://localhost:3000/transactions", dataTransaksi, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
+    // --- FUNGSI FINAL: BAYAR KE DATABASE ---
+    const prosesBayarFix = async () => {
+        const token = localStorage.getItem("token");
+        try {
+            const dataTransaksi = {
+                items: receiptData.items.map(item => ({
+                    product_id: item.id,
+                    quantity: item.quantity
+                }))
+            };
 
-                if (response.status === 201) {
-                    alert("Pembayaran Berhasil! Stok telah diperbarui. 🚀");
-                    fetchProducts(); // Refresh stok tanpa reload halaman
+            const response = await axios.post("http://localhost:3000/transactions", dataTransaksi, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            if (response.status === 201) {
+                alert("🎉 Pembayaran Berhasil! Terima kasih sudah berbelanja.");
+                setShowReceipt(false);
+                fetchProducts(); // Refresh stok
+                
+                if (receiptData.isFromCart) {
+                    // Hapus item yang sudah dibayar dari keranjang
+                    const remainingCart = cart.filter(item => !selectedItems.includes(item.id));
+                    setCart(remainingCart);
+                    setSelectedItems([]);
                 }
-            } catch (error) {
-                alert(error.response?.data?.message || "Gagal memproses transaksi.");
             }
+        } catch (error) {
+            alert(error.response?.data?.message || "Gagal memproses transaksi.");
         }
     };
 
-    // --- FUNGSI BARU: LIHAT DETAIL (Read Detail) ---
     const handleViewDetail = (product) => {
         alert(`📄 DETAIL PRODUK\n\nNama: ${product.name}\nKategori: ${product.category_name}\nDeskripsi: ${product.description || "Tidak ada deskripsi"}\nStok Tersisa: ${product.stock}`);
     };
@@ -110,10 +143,6 @@ function Dashboard() {
         }
     };
 
-    const totalPrice = cart
-        .filter(item => selectedItems.includes(item.id))
-        .reduce((sum, item) => sum + (Number(item.price) * (item.quantity || 1)), 0);
-
     const filteredProducts = products.filter((item) => {
         const categoryMapping = {
             1: "Smartphone", 2: "Laptop", 3: "Peralatan Rumah Tangga",
@@ -140,13 +169,11 @@ function Dashboard() {
 
             <div className="dashboard-container">
                 {showCart ? (
-                    /* ... (Bagian Cart View tetap sama seperti sebelumnya) ... */
                     <div className="cart-view-container">
                         <div className="cart-header-shopee">
                             <h2 className="cart-title">🛒 Keranjang Belanja</h2>
                             <button className="back-shopping-btn" onClick={() => setShowCart(false)}>← Kembali</button>
                         </div>
-                        {/* Render isi cart di sini (seperti kode awalmu) */}
                         <div className="cart-content-shopee">
                              <div className="cart-items-list-shopee">
                                 {cart.length > 0 ? cart.map((item, index) => (
@@ -166,10 +193,15 @@ function Dashboard() {
                                     </div>
                                 )) : <p>Keranjang kosong</p>}
                              </div>
-                             {/* Summary Cart */}
                              <div className="cart-summary-card-shopee">
-                                <h3>Total: Rp {totalPrice.toLocaleString('id-ID')}</h3>
-                                <button className="checkout-btn-shopee" disabled={selectedItems.length === 0}>Checkout</button>
+                                <h3>Total: Rp {receiptData?.total ? receiptData.total.toLocaleString('id-ID') : cart.filter(i => selectedItems.includes(i.id)).reduce((a, b) => a + (b.price * b.quantity), 0).toLocaleString('id-ID')}</h3>
+                                <button 
+                                    className="checkout-btn-shopee" 
+                                    disabled={selectedItems.length === 0}
+                                    onClick={handleCheckout}
+                                >
+                                    Checkout
+                                </button>
                              </div>
                         </div>
                     </div>
@@ -198,7 +230,6 @@ function Dashboard() {
                                         price={Number(item.price).toLocaleString('id-ID')}
                                         image={item.images || "https://via.placeholder.com/500?text=Produk"}
                                         onAddToCart={() => addToCart(item)}
-                                        // PASANG FUNGSI BARU DISINI
                                         onBuyNow={() => handleBuyNow(item)}
                                         onViewDetail={() => handleViewDetail(item)}
                                     />
@@ -209,6 +240,41 @@ function Dashboard() {
                         </div>
                     </>
                 )}
+
+                {/* MODAL STRUK PEMBAYARAN */}
+                {showReceipt && (
+                    <div className="receipt-overlay">
+                        <div className="receipt-card">
+                            <div className="receipt-header">
+                                <h3>🧾 Konfirmasi Pembayaran</h3>
+                                <p>Periksa detail pesanan Anda sebelum membayar</p>
+                            </div>
+                            <hr />
+                            <div className="receipt-body">
+                                {receiptData?.items.map((item) => (
+                                    <div key={item.id} className="receipt-line">
+                                        <span>{item.name} <strong>(x{item.quantity})</strong></span>
+                                        <span>Rp {(item.price * item.quantity).toLocaleString('id-ID')}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <hr />
+                            <div className="receipt-footer">
+                                <div className="total-row">
+                                    <span>Grand Total</span>
+                                    <strong>Rp {receiptData?.total.toLocaleString('id-ID')}</strong>
+                                </div>
+                            </div>
+                            <button className="confirm-pay-btn" onClick={prosesBayarFix}>
+                                💸 Bayar Sekarang
+                            </button>
+                            <button className="cancel-pay-btn" onClick={() => setShowReceipt(false)}>
+                                Batal
+                            </button>
+                        </div>
+                    </div>
+                )}
+                
                 <Footer />
             </div>
         </>
