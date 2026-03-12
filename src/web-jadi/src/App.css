@@ -512,3 +512,59 @@ footer {
     .transaction-info-card-modern { box-shadow: none; border: 1px solid #ddd; }
     .total-amount-badge { color: #27ae60; background: none; padding: 0; }
 }
+
+
+
+
+
+/* Container Terima Kasih */
+.footer-thanks-container {
+    margin-top: 40px;
+    text-align: center; /* Teks ke tengah */
+    padding: 20px;
+}
+
+/* Garis pembatas halus */
+.thanks-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #ccc, transparent);
+    margin-bottom: 20px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.thanks-text {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.sub-thanks {
+    font-size: 13px;
+    color: #95a5a6;
+    font-style: italic;
+}
+
+/* Mockup barcode biar kayak struk asli pas diprint */
+.barcode-mockup {
+    margin-top: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Sembunyikan barcode di layar, tampilkan hanya saat diprint */
+.only-print {
+    display: none;
+}
+
+@media print {
+    .only-print {
+        display: block !important;
+    }
+    .footer-thanks-container {
+        margin-top: 60px;
+    }
+}
