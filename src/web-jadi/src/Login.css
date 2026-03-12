@@ -1,0 +1,189 @@
+/* Login.css - Versi Estetik "Soft Blue & Soft Pink" */
+
+/* 1. Atur Background Layar Full & Posisi ke Tengah */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  /* Font modern biar clean */
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  
+  /* BUBBLE BACKGROUND: Ini efek gradasi soft blue & pink di layar */
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(179, 212, 252, 0.4) 0%, rgba(255, 255, 255, 0) 50%), /* Soft Blue bubble */
+    radial-gradient(circle at 85% 80%, rgba(255, 214, 233, 0.4) 0%, rgba(255, 255, 255, 0) 50%); /* Soft Pink bubble */
+  background-color: #fafbfc; /* Warna dasar abu sangat muda */
+}
+
+/* 2. Atur Kotak Putih (Card) */
+.login-box {
+  background-color: #ffffff;
+  /* Sudut lebih melengkung biar soft */
+  border-radius: 30px; 
+  /* Jarak di dalam kotak lebih lega */
+  padding: 3rem 2rem; 
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  /* Efek bayangan halus agar kotak "mengambang" */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Judul Kecil "Back" di atas (Opsional, kalau mau mirip bgt referensi) */
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  text-decoration: none;
+}
+
+/* 3. Atur Judul Besar "Toko Elektronik Dinda" */
+.login-title {
+  color: #1a1a1a;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* Sub-judul kecil di bawah judul besar */
+.login-subtitle {
+  color: #666;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 2.5rem;
+}
+
+/* 4. Atur Kotak Input & Label */
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+/* Label Input */
+.input-label {
+  display: block;
+  color: #333;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Input Username & Password */
+.input-box {
+  width: 100%;
+  padding: 15px 20px;
+  background-color: #f9f9f9; /* Background input abu-abu muda */
+  border: 1px solid #eee;
+  /* Sudut input melengkung modern */
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box; /* Biar padding nggak bikin kotak lewat batas */
+}
+
+/* Efek saat Input diklik (Focus) */
+.input-box:focus {
+  background-color: #ffffff;
+  /* Warna border saat fokus: soft blue */
+  border-color: #b3d4fc; 
+  /* Efek bayangan tipis warna soft blue */
+  box-shadow: 0 0 8px rgba(179, 212, 252, 0.3);
+  outline: none;
+}
+
+/* Container untuk Password + Icon Mata */
+.password-input-wrapper {
+  position: relative;
+}
+
+/* Input khusus password agar ada ruang untuk icon mata */
+.input-box.password {
+  padding-right: 50px; 
+}
+
+/* Icon Mata (Masih polosan, nanti bisa ditambahin icon beneran) */
+.toggle-password {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* 5. Atur Fitur Tambahan (Remember Me & Forgot Password) */
+.login-helpers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -0.5rem;
+  margin-bottom: 2.5rem;
+  font-size: 0.9rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+}
+
+.forgot-password {
+  color: #888;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* 6. Atur Tombol "Login" (TOMBOL GRADASI JADI BIRO SOFT & PINK SOFT) */
+.btn-login {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  /* Sudut tombol melengkung modern */
+  border-radius: 12px; 
+  /* TEKS DI GANTI LOGIN */
+  color: #333; /* Warna teks gelap biar kebaca di gradasi soft */
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  /* GRADASI: Perpaduan Soft Blue (kiri) ke Soft Pink (kanan) */
+  background: linear-gradient(90deg, #b3d4fc 0%, #ffd6e9 100%);
+  
+  box-shadow: 0 5px 15px rgba(179, 212, 252, 0.3);
+}
+
+/* Efek saat Tombol disentuh kursor (Hover) */
+.btn-login:hover {
+  transform: translateY(-2px); /* Tombol sedikit naik */
+  box-shadow: 0 8px 20px rgba(179, 212, 252, 0.5);
+}
+
+/* 7. Bagian Bawah "Don't have an account? Sign Up" */
+.sign-up-wrapper {
+  margin-top: 3rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Tulisan "Sign Up" diubah jadi Login */
+.login-link {
+  color: #b3d4fc; /* Warna soft blue */
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}

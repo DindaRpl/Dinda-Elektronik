@@ -1,0 +1,140 @@
+/* Container Utama Card */
+.product-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Biar tinggi card sama semua */
+    border: 1px solid #f0f0f0;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Bagian Gambar */
+.product-image-container {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.1);
+}
+
+/* Overlay Lihat Detail biar Elegan */
+.view-detail-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-image-container:hover .view-detail-overlay {
+    opacity: 1;
+}
+
+/* Info Produk */
+.product-info {
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Biar bagian info ngedorong tombol ke bawah */
+}
+
+.product-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Judul panjang jadi titik-titik */
+}
+
+.product-description {
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 10px;
+    height: 35px; /* Batasi tinggi deskripsi */
+    overflow: hidden;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #003366; /* Biru Navy khas Dinda Elektronik */
+    margin-bottom: 15px;
+}
+
+/* --- TOMBOL AKSI BIAR RAPI --- */
+.button-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: auto; /* Maksa tombol selalu di paling bawah card */
+}
+
+/* Tombol Keranjang (Ikon) */
+.add-to-cart-btn {
+    background: #f0f2f5;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1.2rem;
+}
+
+.add-to-cart-btn:hover {
+    background: #e4e6e9;
+    transform: scale(1.05);
+}
+
+/* Tombol Beli Sekarang */
+.buy-now-btn {
+    flex: 1; /* Biar tombol ini ngabisin sisa ruang */
+    background: linear-gradient(45deg, #003366, #00509d);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 51, 102, 0.2);
+}
+
+.buy-now-btn:hover {
+    background: linear-gradient(45deg, #002244, #003366);
+    box-shadow: 0 6px 15px rgba(0, 51, 102, 0.3);
+}

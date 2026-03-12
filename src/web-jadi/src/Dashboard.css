@@ -1,0 +1,692 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.dashboard-title {
+    text-align: center;
+    color: #2b589b;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+/* Biar berjejer 3 kolom seperti di gambar referensi */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 25px;
+}
+
+/* Kartu Produk */
+.product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.product-card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.product-card p {
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.product-price {
+    font-weight: bold;
+    color: #2b589b;
+    font-size: 1.2rem;
+}
+
+
+
+.product-card {
+    background: #ffffff;
+    border-radius: 20px; /* Lebih tumpul biar lebih ramah/ceria */
+    border: 1px solid #eef2f7; /* Garis tipis biar elegan */
+    padding: 10px; /* Kasih ruang di dalam kartu */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efek membal pas di-hover */
+}
+
+.product-card:hover {
+    transform: scale(1.03); /* Membesar dikit pas disentuh */
+    box-shadow: 0 15px 30px rgba(43, 88, 155, 0.1); /* Bayangan biru tipis */
+}
+
+/* Gambar Produk Tumpul */
+.product-card img {
+    border-radius: 15px; /* Biar fotonya ikut tumpul manis */
+}
+
+/* Tombol "Beli" yang Ceria */
+.buy-button {
+    background: #007bff; /* Biru ceria cerah */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 50px; /* Bentuk kapsul biar estetik */
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.buy-button:hover {
+    background: #0056b3;
+    letter-spacing: 1px; /* Efek tulisan merenggang dikit biar keren */
+}
+
+
+
+/* --- TAMBAHAN BIAR CERIA & ELEGAN --- */
+
+/* Banner Promo */
+.hero-banner {
+    background: linear-gradient(135deg, #2b589b 0%, #007bff 100%); /* Gradasi biru ceria */
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    color: white;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(43, 88, 155, 0.2);
+}
+
+.hero-text h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    font-weight: 800;
+}
+
+.hero-text p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 10px 0 20px 0;
+}
+
+.promo-button {
+    background: #fa6b9b; /* Warna kuning biar kontras & ceria! */
+    color: #333;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.promo-button:hover {
+    transform: scale(1.1);
+    background: #ffffff;
+}
+
+
+/* --- MERAPIKAN JUDUL KATALOG BIAR ELEGAN --- */
+.dashboard-title {
+    font-size: 2rem; /* Ukuran pas */
+    font-weight: 700; /* Tebal biar jelas */
+    color: #2b589b; /* Warna biru sesuai header kamu */
+    letter-spacing: -0.5px; /* Sedikit rapat biar modern */
+    margin-top: 50px; /* Kasih jarak lebih lega dari banner promo */
+    margin-bottom: 30px; /* Jarak pas ke produk */
+}
+
+
+
+.search-filter-section {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 20px;
+    border-radius: 50px; /* Tumpul biar elegan */
+    border: 2px solid #eef2f7;
+    outline: none;
+    transition: 0.3s;
+}
+
+.search-input:focus {
+    border-color: #ff69b4; /* Warna pink biar ceria! */
+}
+
+.btn-filter {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 1px solid #2b589b;
+    background: white;
+    color: #2b589b;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: 0.3s;
+}
+
+.btn-filter.active, .btn-filter:hover {
+    background: #ff69b4; /* Pink ceria */
+    color: white;
+    border-color: #ff69b4;
+}
+
+
+
+/* --- Tambahkan di bagian paling bawah Dashboard.css --- */
+
+.recommendation-section {
+    background: linear-gradient(135deg, #fff5f7 0%, #fdf2f8 100%); /* Warna pink gradasi halus */
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 35px;
+    border: 1px solid #fbcfe8;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+    font-size: 1.4rem;
+    color: #be185d; /* Pink tua biar tegas */
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+
+
+.recommendation-grid {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto; /* Biar bisa di-scroll ke samping kalau banyak */
+    padding: 10px 5px;
+    scrollbar-width: thin; /* Untuk Firefox */
+}
+
+/* Biar scrollbar-nya cantik di Chrome/Edge */
+.recommendation-grid::-webkit-scrollbar {
+    height: 6px;
+}
+.recommendation-grid::-webkit-scrollbar-thumb {
+    background: #f472b6;
+    border-radius: 10px;
+}
+
+.recommend-item {
+    background: white;
+    padding: 12px 25px;
+    border-radius: 50px; /* Bentuk kapsul biar kekinian */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    white-space: nowrap;
+    border: 1px solid #fce7f3;
+    transition: transform 0.3s ease;
+}
+
+.recommend-item:hover {
+    transform: translateY(-3px); /* Efek melayang pas di-hover */
+    border-color: #ec4899;
+}
+
+.recommend-item span {
+    color: #ec4899;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-right: 5px;
+}
+
+
+.add-to-cart-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #003060; /* Warna biru tua biar senada */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #f39c12; /* Berubah jadi orange saat disentuh */
+}
+
+
+
+
+
+/* --- STYLE UNTUK KERANJANG --- */
+.cart-view-container {
+    padding: 30px;
+    background-color: #f5f5f5; /* Background abu-abu muda biar item keranjang pop-out */
+    min-height: 80vh;
+}
+
+/* --- HEADER KERANJANG --- */
+.cart-header-shopee {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 15px;
+}
+
+.cart-title {
+    color: #003060; /* Biru DindaElektronik */
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.cart-count-badge {
+    color: #888;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.back-shopping-btn {
+    padding: 10px 18px;
+    background-color: white;
+    color: #003060;
+    border: 1px solid #003060;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.back-shopping-btn:hover {
+    background-color: #003060;
+    color: white;
+}
+
+/* --- LAYOUT UTAMA --- */
+.cart-content-shopee {
+    display: flex;
+    gap: 30px; /* Jarak antara daftar barang dan ringkasan */
+    align-items: flex-start;
+}
+
+/* --- SISI KIRI: DAFTAR BARANG --- */
+.cart-items-list-shopee {
+    flex: 2; /* Mengambil 2/3 ruang */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* --- KARTU PRODUK DI KERANJANG (Modern & Clean) --- */
+.cart-item-card-shopee {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Shadow tipis */
+    transition: transform 0.2s;
+}
+
+.cart-item-card-shopee:hover {
+    transform: translateY(-2px); /* Efek angkat saat di-hover */
+}
+
+/* --- STYLING CHECKBOX ALA SHOPEE --- */
+.cart-item-checkbox-wrapper {
+    margin-right: 20px;
+}
+
+.shopee-style-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #f39c12; /* Warna orange untuk centang */
+}
+
+/* --- GAMBAR PRODUK (Dikecilin & Dirapiin) --- */
+.cart-item-image-wrapper {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-right: 25px;
+    overflow: hidden;
+}
+
+.cart-item-img-shopee {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Menjaga proporsi gambar */
+}
+
+/* --- DETAIL PRODUK --- */
+.cart-item-details-shopee {
+    flex: 1;
+}
+
+.item-name-shopee {
+    margin: 0 0 8px 0;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.item-price-shopee {
+    margin: 0;
+    color: #f39c12; /* Warna orange untuk harga */
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.cart-item-action-shopee {
+    margin-left: 20px;
+}
+
+.delete-item-btn {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.delete-item-btn:hover {
+    opacity: 1;
+}
+
+/* --- EMPTY CART STATE --- */
+.empty-cart-state {
+    text-align: center;
+    background: white;
+    padding: 50px;
+    border-radius: 12px;
+    color: #777;
+}
+
+.empty-cart-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.start-shopping-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* --- SISI KANAN: RINGKASAN BELANJA --- */
+.cart-summary-container-shopee {
+    flex: 1; /* Mengambil 1/3 ruang */
+    position: sticky; /* Bikin nempel pas di-scroll */
+    top: 100px; /* Jarak dari atas header */
+}
+
+.cart-summary-card-shopee {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    border: 1px solid #e0e0e0;
+}
+
+.summary-title-shopee {
+    margin: 0 0 20px 0;
+    color: #003060;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.summary-details-shopee {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.summary-value {
+    font-weight: bold;
+    color: #333;
+}
+
+.discount-text {
+    color: #27ae60; /* Hijau untuk diskon */
+}
+
+.summary-hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 15px 0;
+}
+
+.total-row {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 5px;
+}
+
+.final-price-shopee {
+    color: #f39c12; /* Warna orange Shopee */
+    font-size: 1.5rem;
+}
+
+/* --- TOMBOL CHECKOUT ORANGE --- */
+.checkout-btn-shopee {
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+    background-color: #f39c12; /* Warna orange utama Dinda */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.checkout-btn-shopee:hover {
+    background-color: #e67e22; /* Orange gelap saat di-hover */
+}
+
+.checkout-btn-shopee:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.back-btn-shopee {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: transparent;
+    color: #777;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+
+
+.cart-item-action-shopee {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.qty-btn {
+    background: #f9f9f9;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.qty-btn:hover:not(:disabled) {
+    background: #eee;
+}
+
+.qty-btn:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.qty-number {
+    padding: 0 15px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+.delete-item-btn {
+    margin-left: 10px;
+}
+
+
+.qty-input {
+    width: 30px; 
+    height: 100%;
+    text-align: center;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top: none;
+    border-bottom: none;
+    font-size: 14px;
+    outline: none;
+    background-color: white; /* agar warna background tetap putih */
+}
+
+.quantity-selector-shopee {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-right: 15px;
+    height: 30px; /* Tinggi disamakan agar rapi */
+}
+
+
+
+
+
+
+
+/* --- CSS TABEL KELOLA USER --- */
+.manage-user-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.manage-user-table th {
+    background-color: #003366; /* Biru Navy Konsisten */
+    color: white;
+    padding: 15px;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.manage-user-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    background-color: white;
+}
+
+/* Badge Status Aktif/Nonaktif */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-aktif {
+    background-color: #e6f7ed;
+    color: #27ae60;
+}
+
+.status-nonaktif {
+    background-color: #fceaea;
+    color: #eb5757;
+}
+
+/* --- PERBAIKAN TOMBOL ACTION --- */
+.edit-btn {
+    background-color: #f1c40f;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.edit-btn:hover {
+    background-color: #d4ac0d;
+    transform: scale(1.05);
+}
