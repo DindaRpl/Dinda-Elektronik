@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
 function Header({ 
-    user, // Data user dari Dashboard (ada role & name)
+    user, 
     searchTerm, 
     setSearchTerm, 
     selectedCategory, 
@@ -13,10 +13,10 @@ function Header({
     onLogoClick  
 }) {
     const navigate = useNavigate();
-    const [showDropdown, setShowDropdown] = useState(false); // Untuk kontrol buka-tutup menu
+    const [showDropdown, setShowDropdown] = useState(false);
 
     const handleLogout = () => {
-        localStorage.clear(); // Hapus semua data login
+        localStorage.clear();
         navigate("/login");
     };
 
@@ -47,7 +47,6 @@ function Header({
                     </div>
 
                     <div className="header-icons">
-                        {/* MENU AKUN DENGAN DROPDOWN */}
                         <div 
                             className="icon-item account" 
                             onMouseEnter={() => setShowDropdown(true)}
@@ -58,7 +57,6 @@ function Header({
                                 <strong>Akun Saya ▼</strong>
                             </div>
 
-                            {/* DROPDOWN LOGIC */}
                             {showDropdown && (
                                 <div className="account-dropdown">
                                     <div className="dropdown-header">
@@ -72,15 +70,17 @@ function Header({
                                             <div className="dropdown-item" onClick={() => navigate("/kelola-produk")}>📦 Kelola Produk</div>
                                             <div className="dropdown-item" onClick={() => navigate("/kelola-kategori")}>📂 Kelola Kategori</div>
                                             <div className="dropdown-item" onClick={() => navigate("/kelola-user")}>👥 Kelola User</div>
+                                            {/* Admin juga boleh lihat riwayat transaksi dong! */}
+                                            <div className="dropdown-item" onClick={() => navigate("/riwayat-transaksi")}>📜 Riwayat Transaksi</div>
                                         </>
                                     )}
 
                                     {/* MENU KHUSUS KASIR */}
-                                    {user?.role === 'kasir' && (
+                                    {(user?.role === 'kasir' || user?.role === 'cashier') && (
                                         <>
                                             <div className="dropdown-item" onClick={() => onLogoClick()}>📊 Dashboard</div>
-                                            <div className="dropdown-item" onClick={() => navigate("/transaksi")}>📜 Riwayat Transaksi</div>
-                                            <div className="dropdown-item" onClick={() => navigate("/laporan")}>📈 Detail Transaksi</div>
+                                            {/* PERBAIKAN: Link disamakan dengan App.jsx */}
+                                            <div className="dropdown-item" onClick={() => navigate("/riwayat-transaksi")}>📜 Riwayat Transaksi</div>
                                         </>
                                     )}
 
