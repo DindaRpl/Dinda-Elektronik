@@ -568,3 +568,62 @@ footer {
         margin-top: 60px;
     }
 }
+
+
+/* --- TAMPILAN KHUSUS ADMIN ACCESS DENIED --- */
+.access-denied-card {
+    background: white;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 100px auto;
+}
+
+.lock-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+    display: inline-block;
+    animation: pulseLock 2s infinite;
+}
+
+@keyframes pulseLock {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.badge-kasir {
+    background: #ff9800;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.admin-note {
+    background: #f8f9fa;
+    padding: 15px;
+    border-left: 5px solid #ccc;
+    margin: 20px 0;
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+}
+
+.back-btn-modern {
+    background: #2c3e50;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.back-btn-modern:hover {
+    background: #1a252f;
+    transform: translateY(-2px);
+}
