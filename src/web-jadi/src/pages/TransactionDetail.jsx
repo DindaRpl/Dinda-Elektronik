@@ -49,7 +49,7 @@ const TransactionDetail = () => {
                     <div className="lock-icon">🔒</div>
                     <h2>Akses Terbatas !</h2>
                     <p>
-                        Maaf, sesuai aturan <strong>UKT Backend</strong>, rincian transaksi 
+                        Maaf, rincian transaksi 
                         hanya boleh diakses oleh <span className="badge-kasir">Kasir</span>.
                     </p>
                     <div className="admin-note">
