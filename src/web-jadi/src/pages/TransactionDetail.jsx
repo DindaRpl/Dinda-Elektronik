@@ -47,7 +47,7 @@ const TransactionDetail = () => {
             <div className="manage-container">
                 <div className="access-denied-card">
                     <div className="lock-icon">🔒</div>
-                    <h2>Akses Terbatas, Boss!</h2>
+                    <h2>Akses Terbatas !</h2>
                     <p>
                         Maaf, sesuai aturan <strong>UKT Backend</strong>, rincian transaksi 
                         hanya boleh diakses oleh <span className="badge-kasir">Kasir</span>.
