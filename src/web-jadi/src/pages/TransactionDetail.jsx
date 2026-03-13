@@ -7,23 +7,64 @@ const TransactionDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    
+    // Ambil token dan data user buat cek Role
     const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user")); 
 
     useEffect(() => {
+        // JIKA ADMIN: Langsung stop, gak usah panggil API
+        if (user?.role === 'admin') {
+            setLoading(false);
+            return;
+        }
+
+        // JIKA KASIR: Baru panggil API
         axios.get(`http://localhost:3000/transactions/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(res => {
             setData(res.data.transaction);
+            setLoading(false);
         })
-        .catch(err => alert("Gagal memuat detail transaksi!"));
-    }, [id]);
+        .catch(err => {
+            console.error(err);
+            setLoading(false);
+        });
+    }, [id, token, user?.role]);
 
     const handlePrint = () => {
         window.print();
     };
 
-    if (!data) return <div className="manage-container">Memuat rincian...</div>;
+    // 1. Tampilan Loading
+    if (loading) return <div className="manage-container">Memuat rincian...</div>;
+
+    // 2. TAMPILAN KHUSUS ADMIN (ACCESS DENIED)
+    if (user?.role === 'admin') {
+        return (
+            <div className="manage-container">
+                <div className="access-denied-card">
+                    <div className="lock-icon">🔒</div>
+                    <h2>Akses Terbatas, Boss!</h2>
+                    <p>
+                        Maaf, sesuai aturan <strong>UKT Backend</strong>, rincian transaksi 
+                        hanya boleh diakses oleh <span className="badge-kasir">Kasir</span>.
+                    </p>
+                    <div className="admin-note">
+                        Admin hanya diperbolehkan melihat rekapitulasi laporan utama.
+                    </div>
+                    <button className="back-btn-modern" onClick={() => navigate("/riwayat-transaksi")}>
+                        ⬅ Kembali ke Riwayat
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
+    // 3. TAMPILAN DETAIL UNTUK KASIR (Jika data ada)
+    if (!data) return <div className="manage-container">Data tidak ditemukan atau akses ditolak.</div>;
 
     return (
         <div className="manage-container">
